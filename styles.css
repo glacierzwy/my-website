@@ -4,7 +4,7 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-image:url(image.png) no-repeat center center fixed; 
+    background-image:url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif') no-repeat center center fixed; 
     background-size: cover;
     font-family: Arial, sans-serif;
     color: white;
