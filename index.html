@@ -9,51 +9,46 @@
             margin: 0;
             padding: 0;
             height: 100%;
+            background: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 请确保photo.gif在同一目录下或正确路径 */
-            background-size: cover;
-            background-position: center;
-            color: white; /* 根据背景图调整文本颜色 */
-            font-family: Arial, sans-serif;
-            text-align: center; /* 使内容居中 */
-            overflow: hidden; /* 防止内容溢出 */
+            align-items: center;
+            overflow: hidden;
         }
-        .word-image {
+        .word-gif {
             position: absolute;
-            top: 10%; /* 根据需要调整位置 */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%; /* 根据需要调整大小 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%; /* Adjust this value if needed */
+            z-index: 1; /* Ensure it's below the countdown text */
         }
         .countdown-container {
-            position: absolute;
-            bottom: 20%; /* 根据需要调整位置 */
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            z-index: 2; /* Ensure it's above the word.gif */
             text-align: center;
+            width: 100%;
+            bottom: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.8); /* Optional: semi-transparent background for better readability */
         }
         .countdown-title {
-            font-size: 24px;
-            margin-bottom: 10px; /* 与倒计时数字保持一定距离 */
+            font-size: 60px;
+            margin-bottom: 20px;
         }
-        .countdown {
-            font-size: 24px;
-        }
-        .countdown span {
-            margin: 0 10px; /* 数字之间的间距 */
+        .countdown-time {
+            font-size: 48px;
         }
     </style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-image"> <!-- 请确保word.gif在同一目录下或正确路径 -->
+    <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="这里有一行很棒的艺术字，但是加载失败啦..." class="word-gif">
     <div class="countdown-container">
-        <div class="countdown-title">距离Freedom还有：</div>
-        <div class="countdown" id="countdown">
-            <span id="days">00</span>天 <span id="hours">00</span>小时 <span id="minutes">00</span>分钟 <span id="seconds">00</span>秒
-        </div>
+        <div class="countdown-title">距离Freedom还有</div>
+        <div id="countdown" class="countdown-time"></div>
     </div>
 
     <script>
@@ -62,25 +57,16 @@
             const now = new Date().getTime();
             const distance = targetDate - now;
 
-            if (distance < 0) {
-                clearInterval(interval);
-                document.getElementById('countdown').innerHTML = '吗的！走啦！新年快乐！！！';
-                return;
-            }
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            document.getElementById('countdown').innerHTML = `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
         }
 
-        const interval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // 初始调用以立即显示倒计时
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display the countdown immediately
     </script>
 </body>
 </html>
