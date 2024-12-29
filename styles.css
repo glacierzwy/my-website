@@ -4,7 +4,7 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: url('https://glacierzwy.github.io/my-website/photo.gif') no-repeat center center fixed; 
+    background: url('photo.gif') no-repeat center center fixed; 
     background-size: cover;
     font-family: Arial, sans-serif;
     color: white;
