@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>倒计时到1月27日20:00</title>
+    <title>Countdown to Freedom</title>
     <style>
         body {
             margin: 0;
@@ -28,7 +28,7 @@
     </style>
     <script>
         function updateCountdown() {
-            const targetDate = new Date('January 27, 2023 20:00:00').getTime();
+            const targetDate = new Date('January 27, 2025 20:00:00').getTime();
             const now = new Date().getTime();
             const distance = targetDate - now;
 
@@ -40,7 +40,7 @@
             document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
             if (distance < 0) {
-                document.getElementById('countdown').innerHTML = "倒计时结束！";
+                document.getElementById('countdown').innerHTML = "吗的！走啦！新年快乐";
             }
 
             setTimeout(updateCountdown, 1000);
@@ -50,6 +50,6 @@
     </script>
 </head>
 <body>
-    <div id="countdown">加载中...</div>
+    <div id="countdown">等我算算...等我算算...</div>
 </body>
 </html>
