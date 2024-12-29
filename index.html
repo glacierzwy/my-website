@@ -19,35 +19,21 @@
             color: white; /* 根据背景图调整文本颜色 */
             font-family: Arial, sans-serif;
             text-align: center; /* 使内容居中 */
-        }
-        .loading {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            z-index: 1000; /* 确保加载文本在顶层显示 */
-        }
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            position: relative;
-            z-index: 1; /* 确保内容在加载文本之上 */
-            padding: 20px; /* 添加内边距以避免内容紧贴边缘 */
-            box-sizing: border-box; /* 确保内边距不影响整体高度 */
+            overflow: hidden; /* 防止内容溢出 */
         }
         .word-image {
-            width: 40%; /* 根据需要调整大小 */
-            margin-bottom: 20px; /* 与倒计时文本保持一定距离 */
+            position: absolute;
+            top: 10%; /* 根据需要调整位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%; /* 根据需要调整大小 */
         }
         .countdown-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: absolute;
+            bottom: 20%; /* 根据需要调整位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
         }
         .countdown-title {
             font-size: 24px;
@@ -62,14 +48,11 @@
     </style>
 </head>
 <body>
-    <div id="loading" class="loading">我正在努力算呢...不许催！</div>
-    <div id="content" class="content" style="display:none;">
-        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-image"> <!-- 请确保word.gif在同一目录下或正确路径 -->
-        <div class="countdown-container">
-            <div class="countdown-title">距离Freedom还有：</div>
-            <div class="countdown" id="countdown">
-                <span id="days">00</span>天 <span id="hours">00</span>小时 <span id="minutes">00</span>分钟 <span id="seconds">00</span>秒
-            </div>
+    <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-image"> <!-- 请确保word.gif在同一目录下或正确路径 -->
+    <div class="countdown-container">
+        <div class="countdown-title">距离Freedom还有：</div>
+        <div class="countdown" id="countdown">
+            <span id="days">00</span>天 <span id="hours">00</span>小时 <span id="minutes">00</span>分钟 <span id="seconds">00</span>秒
         </div>
     </div>
 
@@ -97,13 +80,7 @@
         }
 
         const interval = setInterval(updateCountdown, 1000);
-
-        // 页面加载完成后隐藏加载文本并显示内容
-        window.onload = function() {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('content').style.display = 'flex';
-            updateCountdown(); // 初始调用以立即显示倒计时
-        };
+        updateCountdown(); // 初始调用以立即显示倒计时
     </script>
 </body>
 </html>
