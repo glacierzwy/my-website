@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 使用原始链接或GitHub Pages链接 */
+            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 替换为你的GitHub链接 */
             background-size: cover;
             background-position: center;
             color: white;
@@ -17,56 +17,79 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             overflow: hidden;
         }
-        .header {
-            font-size: 3em;
-            font-weight: bold;
-            font-family: 'KaiTi', '楷体', serif; /* 使用支持艺术字的字体，这里以楷体为例 */
+        .loading {
+            font-size: 2em;
             margin-top: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 添加文本阴影效果 */
+        }
+        .image-container {
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 30%; /* 根据需要调整图片大小 */
         }
         .countdown-container {
-            margin-top: 20px;
+            margin-top: 40px;
             font-size: 2em;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="header">新春快乐</div>
-    <div class="countdown-container">
-        <p>距离Freedom还有</p>
-        <div class="countdown-container" id="countdown">
-            <!-- 倒计时将显示在这里 -->
-        </div>
+    <div class="loading" id="loading">我正在努力算呢...不许催！</div>
+    <div class="image-container hidden" id="image-container">
+        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/word.gif" alt="Word Image"> <!-- 替换为你的GitHub链接 -->
     </div>
-
+    <div class="countdown-container hidden" id="countdown-container">
+        <p>距离Freedom还有</p>
+        <div id="countdown"></div>
+    </div>
+ 
     <script>
-        function startCountdown(endDate) {
+        document.addEventListener('DOMContentLoaded', () => {
+            const loading = document.getElementById('loading');
+            const imageContainer = document.getElementById('image-container');
+            const countdownContainer = document.getElementById('countdown-container');
+ 
+            // 设置一个短暂的延迟来模拟“正在加载”的效果
+            setTimeout(() => {
+                loading.classList.add('hidden');
+                imageContainer.classList.remove('hidden');
+                countdownContainer.classList.remove('hidden');
+ 
+                startCountdown('2025-01-27T20:00:00');
+            }, 1000); // 延迟1秒
+        });
+ 
+        function startCountdown(endDateStr) {
+            const endDate = new Date(endDateStr).getTime();
             const countdownElement = document.getElementById('countdown');
-            const interval = setInterval(() => {
+            const updateCountdown = () => {
                 const now = new Date().getTime();
                 const distance = endDate - now;
-
+ 
                 if (distance < 0) {
                     clearInterval(interval);
-                    countdownElement.innerHTML = '吗的！走啦！新年快乐！';
+                    countdownElement.innerHTML = '倒计时结束！';
                     return;
                 }
-
+ 
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                countdownElement.innerHTML = `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
-            }, 1000);
+ 
+                countdownElement.innerHTML = `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+            };
+ 
+            const interval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // 立即调用一次以显示初始倒计时
         }
-
-        // 设置倒计时结束日期
-        const targetDate = new Date('2025-01-27T20:00:00').getTime();
-        startCountdown(targetDate);
     </script>
 </body>
 </html>
