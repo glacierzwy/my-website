@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown to Freedom</title>
+    <title>倒计时到Freedom</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 确保路径正确 */
+            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 请确保photo.gif位于正确路径 */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -20,24 +20,27 @@
             font-family: Arial, sans-serif;
             color: white; /* 根据背景图调整文字颜色 */
             text-align: center;
+            overflow: hidden; /* 防止内容溢出 */
         }
-
+ 
         #loading {
             font-size: 2em;
-            margin-top: 20vh; /* 使用视口高度单位来定位 */
+            margin-top: 20vh; /* 使用视口高度单位 */
         }
-
+ 
         .content {
             position: relative;
             width: 100%;
-            max-width: 800px; /* 可根据需要调整 */
+            max-width: 800px; /* 可根据需要调整宽度 */
+            margin: 0 auto;
         }
-
+ 
         .word-img {
-            width: 50%; /* 可根据需要调整 */
+            width: 100%; /* 或设置为具体像素值/百分比，以适应设计 */
+            max-width: 300px; /* 限制最大宽度，防止过大 */
             margin: 0 auto 20px; /* 上下居中，并为倒计时留出空间 */
         }
-
+ 
         .countdown-container {
             position: absolute;
             bottom: 0;
@@ -45,12 +48,12 @@
             right: 0;
             text-align: center;
         }
-
+ 
         .countdown-title {
             font-size: 1.5em;
             margin-bottom: 10px;
         }
-
+ 
         .countdown {
             font-size: 2em;
         }
@@ -59,46 +62,46 @@
 <body>
     <div id="loading">我正在努力算呢...不许催！</div>
     <div class="content" id="content" style="display:none;">
-        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-img"> <!-- 确保路径正确 -->
+        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-img"> <!-- 请确保word.gif位于正确路径 -->
         <div class="countdown-container">
             <p class="countdown-title">距离Freedom还有</p>
             <div class="countdown" id="countdown"></div>
         </div>
     </div>
-
+ 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var targetDate = new Date("2023-01-27T20:00:00").getTime();
             var countdownElement = document.getElementById('countdown');
             var contentElement = document.getElementById('content');
             var loadingElement = document.getElementById('loading');
-
+ 
             function updateCountdown() {
                 var now = new Date().getTime();
                 var distance = targetDate - now;
-
+ 
                 if (distance < 0) {
                     clearInterval(interval);
-                    countdownElement.innerHTML = "吗的！走啦！新年快乐！";
+                    countdownElement.innerHTML = "时间到了！";
                     return;
                 }
-
+ 
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                countdownElement.innerHTML = days + "天 " + hours + "小时 " + minutes + "分钟 " + seconds + "秒 ";
-
-                if (distance > 0) {
+ 
+                countdownElement.innerHTML = days + "天 " + hours + "小时 " + minutes + "分钟 " + seconds + "秒";
+ 
+                if (distance >= 0 && !contentElement.style.display) {
                     contentElement.style.display = 'block';
                     loadingElement.style.display = 'none';
                 }
             }
-
+ 
             var interval = setInterval(updateCountdown, 1000);
-
-            // 初次加载时立即调用一次以显示内容（如果距离不为负）
+ 
+            // 立即调用一次以检查是否需要显示内容
             updateCountdown();
         });
     </script>
