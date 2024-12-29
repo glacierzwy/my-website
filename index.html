@@ -48,6 +48,7 @@
 
         .countdown-time {
             font-size: 48px;
+            font-family: '楷体', 'KaiTi', serif; /
         }
     </style>
 </head>
@@ -69,8 +70,6 @@
                 if (distance < 0) {
                     clearInterval(updateInterval);
                     countdownElement.innerHTML = '吗的！走啦！回家过年！';
-                    countdownElement.style.fontFamily = '楷体', 'KaiTi', serif; // 设置字体为楷体
-                    countdownElement.style.fontSize = '48px';   // 设置字号为48
 
                 } else {
                     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
