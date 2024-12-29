@@ -20,6 +20,13 @@
             height: 100vh;
             overflow: hidden;
         }
+        .header {
+            font-size: 3em;
+            font-weight: bold;
+            font-family: 'KaiTi', '楷体', serif; /* 使用支持艺术字的字体，这里以楷体为例 */
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 添加文本阴影效果 */
+        }
         .countdown-container {
             margin-top: 20px;
             font-size: 2em;
@@ -27,7 +34,8 @@
     </style>
 </head>
 <body>
-    <div>
+    <div class="header">新春快乐</div>
+    <div class="countdown-container">
         <p>距离Freedom还有</p>
         <div class="countdown-container" id="countdown">
             <!-- 倒计时将显示在这里 -->
