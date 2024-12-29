@@ -19,10 +19,10 @@
         }
         .word-gif {
             position: absolute;
-            top: 0;
+            top: -20px;
             left: 0;
-            width: 100%;
-            height: 100%; /* Adjust this value if needed */
+            width: 80%;
+            height: 80%; /* Adjust this value if needed */
             z-index: 1; /* Ensure it's below the countdown text */
         }
         .countdown-container {
@@ -30,7 +30,8 @@
             z-index: 2; /* Ensure it's above the word.gif */
             text-align: center;
             width: 100%;
-            bottom: 0;
+            /* bottom: 0; 这行代码可以移除或根据需要调整 */
+            top: 40px; /* 下移40像素，注意这里使用了top属性而不是bottom */
             padding: 20px;
             box-sizing: border-box;
             color: white; /* 文字颜色设置为白色 */
