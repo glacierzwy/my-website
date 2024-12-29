@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown to Freedom</title>
+    <title>Cutdown to Freedom</title>
     <style>
         body, html {
             margin: 0;
@@ -13,11 +13,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 替换为您的photo.gif路径 */
+            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 请确保photo.gif在同一目录下或正确路径 */
             background-size: cover;
             background-position: center;
-            color: white; /* 根据需要调整文本颜色 */
+            color: white; /* 根据背景图调整文本颜色 */
             font-family: Arial, sans-serif;
+            text-align: center; /* 使内容居中 */
         }
         .loading {
             position: fixed;
@@ -35,16 +36,25 @@
             width: 100%;
             height: 100%;
             position: relative;
-            z-index: 1; /* 确保内容在加载文本之上，但在背景图之下（实际上由于flex布局，这里不需要特别设置） */
+            z-index: 1; /* 确保内容在加载文本之上 */
+            padding: 20px; /* 添加内边距以避免内容紧贴边缘 */
+            box-sizing: border-box; /* 确保内边距不影响整体高度 */
         }
         .word-image {
             width: 100%; /* 根据需要调整大小 */
             margin-bottom: 20px; /* 与倒计时文本保持一定距离 */
         }
-        .countdown {
-            text-align: center;
+        .countdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .countdown-title {
             font-size: 24px;
-            margin-top: 20px; /* 与word.gif保持一定距离 */
+            margin-bottom: 10px; /* 与倒计时数字保持一定距离 */
+        }
+        .countdown {
+            font-size: 24px;
         }
         .countdown span {
             margin: 0 10px; /* 数字之间的间距 */
@@ -53,10 +63,13 @@
 </head>
 <body>
     <div id="loading" class="loading">我正在努力算呢...不许催！</div>
-    <div id="content" class="content" style="display:none;"> <!-- 初始隐藏内容 -->
-        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-image"> <!-- 替换为您的word.gif路径 -->
-        <div class="countdown" id="countdown">
-            <p>距离Freedom还有：<span id="days">00</span>天 <span id="hours">00</span>小时 <span id="minutes">00</span>分钟 <span id="seconds">00</span>秒</p>
+    <div id="content" class="content" style="display:none;">
+        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-image"> <!-- 请确保word.gif在同一目录下或正确路径 -->
+        <div class="countdown-container">
+            <div class="countdown-title">距离Freedom还有：</div>
+            <div class="countdown" id="countdown">
+                <span id="days">00</span>天 <span id="hours">00</span>小时 <span id="minutes">00</span>分钟 <span id="seconds">00</span>秒
+            </div>
         </div>
     </div>
 
@@ -68,7 +81,7 @@
 
             if (distance < 0) {
                 clearInterval(interval);
-                document.getElementById('countdown').innerHTML = '吗的！走啦！新年快乐！';
+                document.getElementById('countdown').innerHTML = '吗的！走啦！新年快乐！！！';
                 return;
             }
 
