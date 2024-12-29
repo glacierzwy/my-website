@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,48 +8,57 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif');
+            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 使用原始链接或GitHub Pages链接 */
             background-size: cover;
             background-position: center;
             color: white;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
         }
-        #countdown {
+        .countdown-container {
+            margin-top: 20px;
             font-size: 2em;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
         }
     </style>
-    <script>
-        function updateCountdown() {
-            const targetDate = new Date('January 27, 2025 20:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = "吗的！走啦！新年快乐！";
-            }
-
-            setTimeout(updateCountdown, 1000);
-        }
-
-        window.onload = updateCountdown;
-    </script>
 </head>
 <body>
-    <div id="countdown">计算中...不许催...</div>
+    <div>
+        <p>距离Freedom还有</p>
+        <div class="countdown-container" id="countdown">
+            <!-- 倒计时将显示在这里 -->
+        </div>
+    </div>
+
+    <script>
+        function startCountdown(endDate) {
+            const countdownElement = document.getElementById('countdown');
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endDate - now;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = '吗的！走啦！新年快乐！';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+            }, 1000);
+        }
+
+        // 设置倒计时结束日期
+        const targetDate = new Date('2025-01-27T20:00:00').getTime();
+        startCountdown(targetDate);
+    </script>
 </body>
 </html>
