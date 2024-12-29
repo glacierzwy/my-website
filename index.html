@@ -56,27 +56,19 @@
     <script>
         function updateCountdown() {
             const targetDate = new Date('2025-01-27T20:00:00').getTime();
-            const updateInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
+            const now = new Date().getTime();
+            const distance = targetDate - now;
  
-                if (distance < 0) {
-                    // 倒计时结束，清除定时器并更新内容
-                    clearInterval(updateInterval);
-                    document.getElementById('countdown').innerHTML = '吗的！走啦！回家过年！';
-                } else {
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
  
-                    document.getElementById('countdown').innerHTML = `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
-                }
-            }, 1000); // 每秒更新一次
+            document.getElementById('countdown').innerHTML = `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
         }
  
-        // 初始化倒计时
-        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display the countdown immediately
     </script>
 </body>
 </html>
