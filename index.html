@@ -5,91 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown to Freedom</title>
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
-            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 替换为你的GitHub链接 */
+            width: 100%;
+            height: 100%;
+            background-image: url('https://raw.githubusercontent.com/glacierzwy/my-website/59c89135d0ed2f96c85f5b914681ff2a81ce449c/photo.gif'); /* 确保路径正确 */
             background-size: cover;
             background-position: center;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            color: white; /* 根据背景图调整文字颜色 */
+            text-align: center;
         }
-        .loading {
+
+        #loading {
             font-size: 2em;
-            margin-top: 20px;
+            margin-top: 20vh; /* 使用视口高度单位来定位 */
         }
-        .image-container {
-            margin-top: 20px;
+
+        .content {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* 可根据需要调整 */
         }
-        .image-container img {
-            width: 30%; /* 根据需要调整图片大小 */
+
+        .word-img {
+            width: 50%; /* 可根据需要调整 */
+            margin: 0 auto 20px; /* 上下居中，并为倒计时留出空间 */
         }
+
         .countdown-container {
-            margin-top: 40px;
-            font-size: 2em;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
         }
-        .hidden {
-            display: none;
+
+        .countdown-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .countdown {
+            font-size: 2em;
         }
     </style>
 </head>
 <body>
-    <div class="loading" id="loading">我正在努力算呢...不许催！</div>
-    <div class="image-container hidden" id="image-container">
-        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="这里有一个很好看的艺术字，但是没加载出来...">  <!-- 替换为你的GitHub链接 -->
+    <div id="loading">我正在努力算呢...不许催！</div>
+    <div class="content" id="content" style="display:none;">
+        <img src="https://raw.githubusercontent.com/glacierzwy/my-website/f00b39e2c9d85c290651e3c400f03e704ed507f6/word.gif" alt="Word Image" class="word-img"> <!-- 确保路径正确 -->
+        <div class="countdown-container">
+            <p class="countdown-title">距离Freedom还有</p>
+            <div class="countdown" id="countdown"></div>
+        </div>
     </div>
-    <div class="countdown-container hidden" id="countdown-container">
-        <p>距离Freedom还有</p>
-        <div id="countdown"></div>
-    </div>
- 
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loading = document.getElementById('loading');
-            const imageContainer = document.getElementById('image-container');
-            const countdownContainer = document.getElementById('countdown-container');
- 
-            // 设置一个短暂的延迟来模拟“正在加载”的效果
-            setTimeout(() => {
-                loading.classList.add('hidden');
-                imageContainer.classList.remove('hidden');
-                countdownContainer.classList.remove('hidden');
- 
-                startCountdown('2025-01-27T20:00:00');
-            }, 1000); // 延迟1秒
-        });
- 
-        function startCountdown(endDateStr) {
-            const endDate = new Date(endDateStr).getTime();
-            const countdownElement = document.getElementById('countdown');
-            const updateCountdown = () => {
-                const now = new Date().getTime();
-                const distance = endDate - now;
- 
+        document.addEventListener('DOMContentLoaded', function() {
+            var targetDate = new Date("2023-01-27T20:00:00").getTime();
+            var countdownElement = document.getElementById('countdown');
+            var contentElement = document.getElementById('content');
+            var loadingElement = document.getElementById('loading');
+
+            function updateCountdown() {
+                var now = new Date().getTime();
+                var distance = targetDate - now;
+
                 if (distance < 0) {
                     clearInterval(interval);
-                    countdownElement.innerHTML = '倒计时结束！';
+                    countdownElement.innerHTML = "吗的！走啦！新年快乐！";
                     return;
                 }
- 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
- 
-                countdownElement.innerHTML = `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
-            };
- 
-            const interval = setInterval(updateCountdown, 1000);
-            updateCountdown(); // 立即调用一次以显示初始倒计时
-        }
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = days + "天 " + hours + "小时 " + minutes + "分钟 " + seconds + "秒 ";
+
+                if (distance > 0) {
+                    contentElement.style.display = 'block';
+                    loadingElement.style.display = 'none';
+                }
+            }
+
+            var interval = setInterval(updateCountdown, 1000);
+
+            // 初次加载时立即调用一次以显示内容（如果距离不为负）
+            updateCountdown();
+        });
     </script>
 </body>
 </html>
